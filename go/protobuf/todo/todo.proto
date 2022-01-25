@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package todo; // 这个 package 名字和生成的 go 代码没有直接关系？
+
+// 注意这里需要添加这行，
+// 根据官网的文档说明，生成 go 代码需要指定 go import path，可以通过两种形式引入
+// 1. 在 proto 文件中加入 go_package 字段
+// 2. 在 protoc 命令执行的 command line 中加入
+// 如果 todo.proto 文件放在 ./todo/目录下，这个时候要把 todo.pb.go 生成在这个目录下的话
+// go_package 目录要写成如下路径，才能正确生成 go 代码，如果写成 ./ ，那么生成的 go 代码中 package 字段变成了__，而不是todo
+// 这里的路径最后一个文件夹的名字就是生成的 go 代码的 package 名字
+// 生成 go 代码的命令： protoc --go_out=. todo.proto
+option go_package = "../todo";
+
+message Task {
+  string text = 1;
+  bool done = 2;
+}
