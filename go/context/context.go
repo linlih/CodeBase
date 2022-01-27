@@ -29,5 +29,4 @@ func handle(ctx context.Context, duration time.Duration) {
 	case <-time.After(duration):
 		fmt.Println("Process request with", duration)
 	}
-	time.Now().Local()
 }
