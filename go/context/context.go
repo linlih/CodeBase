@@ -7,7 +7,37 @@ import (
 )
 
 func main() {
-	TimeOutCtxDemo()
+	//TimeOutCtxDemo()
+	TestCancelCtxDemo()
+}
+
+func TestCancelCtxDemo() {
+	ctx, canel := context.WithCancel(context.Background())
+
+	go submission(ctx)
+	// do something
+	time.Sleep(2 * time.Second)
+	//  happened error here ,cancel sub goroutine
+	canel()
+	fmt.Println("done!")
+	for {
+
+	}
+}
+
+func submission(ctx context.Context) {
+	// 这里也可以do something
+	for {
+		// 这里也可以do something
+		select {
+		case <-ctx.Done():
+			fmt.Println("being canceled!", ctx.Err())
+			return
+		default:
+			fmt.Println("do something in sub mission")
+			time.Sleep(1 * time.Second)
+		}
+	}
 }
 
 func TimeOutCtxDemo() {
