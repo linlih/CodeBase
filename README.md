@@ -12,6 +12,8 @@
  - [实现一个指定时间后执行函数的Job调度](go/after_time_job) 
  - [测量一个 goroutine 的内存占用](go/goroutine/goroutine-size.go)
  - [测试 goroutine 切换的时间开销](go/goroutine/context-switch_test.go)
+ - [sync包的pool示例，减少内存分配](go/sync/pool)
+ - [sync包的cond示例，可实现通知和广播](go/sync/cond)
 
 代码目录（c++）
 
