@@ -8,3 +8,4 @@ include_directories(include)
 add_executable(netstack
         src/main.c
         src/tuntap_if.c src/utils.c include/utils.h include/tuntap_if.h include/ethernet.h include/skbuff.h include/netdev.h include/list.h include/route.h src/skbuff.c src/route.c src/netdev.c include/ip.h)
+TARGET_LINK_LIBRARIES(netstack pthread)

@@ -22,7 +22,15 @@
 #if DEBUG_IP
 #define ip_dbg(msg, hdr) \
     do{                  \
-    print_debug("ip "msg" (ihl")\
+    print_debug("ip "msg" (ihl: %hhu tos: %hhu" \
+                "len %hu id: %hu frag_offset: %hu ttl: %hhu" \
+                "proto: %hhu csum: %hx"                     \
+                "saddr: %hhu.%hhu.%hhu.%hhu daddr: %hhu.%hhu.%hhu.%hhu)",                     \
+                hdr->ihl, hdr->version, hdr->tos,                     \
+                hdr->len, hdr->frag_offset, hdr->ttl,        \
+                hdr->proto, hdr->csum,          \
+                hdr->saddr >> 24, hdr->saddr >> 16, hdr->saddr >> 8, hdr->saddr >> 0,         \
+                hdr->daddr >> 24, hdr->daddr >> 16, hdr->daddr >> 8, hdr->daddr >> 0);\
     }
 #else
 #define ip_dbg(msg, hdr)
@@ -55,5 +63,8 @@ static inline uint32_t ip_parse(char *addr) {
     }
     return ntohl(dst);
 }
+
+int ip_rcv(struct sk_buff *skb);
+int ip_output(struct sock *sk, struct sk_buff *skb);
 
 #endif //NETSTACK_IP_H
