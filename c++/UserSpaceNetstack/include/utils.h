@@ -7,6 +7,9 @@
 
 #define CMDBUFLEN 100
 
+#define print_debug(str, ...) \
+    printf(str" - %s:%u\n", ##__VA_ARGS__, __FILE__, __LINE__);
+
 #define print_err(str, ...) \
     fprintf(stderr, str, ##__VA_ARGS__);
 
