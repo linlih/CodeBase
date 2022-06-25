@@ -22,6 +22,7 @@ struct rb_root {
 #define rb_parent(r) ((struct rb_node*)((r)->rb_parent_color) & ~3)
 #define rb_color(r) ((r)->rb_parent_color & 1)
 #define rb_is_red(r) (!rb_color(r))
+#define rb_is_black(r) (rb_color(r))
 #define rb_set_red(r) do { (r)->rb_parent_color &= ~1; } while(0)
 #define rb_set_black(r) do { (r)->rb_parent_color |= 1; } while(0)
 
